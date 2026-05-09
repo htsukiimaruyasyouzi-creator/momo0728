@@ -24,11 +24,11 @@ body{background:var(--bg);color:var(--cream);font-family:'Noto Serif JP',serif;f
 
 /* ══ CANVASES ══ */
 #bg-canvas{position:fixed;inset:0;z-index:0;pointer-events:none}
-#mirrorball-canvas{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:0;transition:opacity 1.5s ease}
+#mirrorball-canvas{position:fixed;inset:0;z-index:2;pointer-events:none;opacity:0;transition:opacity 1.5s ease}
 #mirrorball-canvas.active{opacity:.92}
 
 /* ══ CONFETTI ══ */
-.conf{position:fixed;top:-24px;pointer-events:none;z-index:1;animation:cfall linear infinite}
+.conf{position:fixed;top:-24px;pointer-events:none;z-index:3;animation:cfall linear infinite}
 @keyframes cfall{0%{transform:translateY(-20px) rotate(0deg) scale(1);opacity:1}100%{transform:translateY(106vh) rotate(800deg) scale(.35);opacity:0}}
 
 /* ══ AURORA ══ */
@@ -79,7 +79,7 @@ section{min-height:100vh;padding:120px 24px 100px;display:flex;flex-direction:co
 .rv-g.on{opacity:1;filter:blur(0) brightness(1) saturate(1)}
 
 /* ══ FLOATING BALLOONS ══ */
-.balloon-layer{position:fixed;inset:0;pointer-events:none;z-index:1;overflow:hidden}
+.balloon-layer{position:fixed;inset:0;pointer-events:none;z-index:4;overflow:hidden}
 .balloon{
   position:absolute;bottom:-160px;
   animation:balloonRise linear infinite;
@@ -95,7 +95,7 @@ section{min-height:100vh;padding:120px 24px 100px;display:flex;flex-direction:co
 }
 
 /* ══ BUBBLES (シャボン玉) ══ */
-.bubble-layer{position:fixed;inset:0;pointer-events:none;z-index:1;overflow:hidden}
+.bubble-layer{position:fixed;inset:0;pointer-events:none;z-index:3;overflow:hidden}
 .bubble{
   position:absolute;border-radius:50%;bottom:-80px;
   background:radial-gradient(circle at 32% 28%,rgba(255,255,255,.55),rgba(255,255,255,.05) 60%,transparent 100%);
@@ -385,12 +385,12 @@ footer::before{content:'';position:absolute;inset:0;background:radial-gradient(e
 }
 
 /* ══ CHARA ══ */
-.chara-wrap{position:relative;width:100%;max-width:600px;padding-top:160px}
+.chara-wrap{position:relative;width:100%;max-width:600px;padding-top:90px}
 .chara-img{
   position:absolute;
-  bottom:0;
-  right:clamp(-10px,2%,20px);
-  width:clamp(130px,28vw,190px);
+  top:0;
+  right:clamp(8px,6%,40px);
+  width:clamp(65px,17vw,100px);
   z-index:10;
   filter:drop-shadow(0 8px 24px rgba(255,107,157,.6)) drop-shadow(0 0 30px rgba(168,85,247,.4));
   animation:charaFloat 3.5s ease-in-out infinite;
@@ -398,7 +398,7 @@ footer::before{content:'';position:absolute;inset:0;background:radial-gradient(e
 }
 @keyframes charaFloat{
   0%,100%{transform:rotate(-2deg) translateY(0)}
-  50%    {transform:rotate(2deg) translateY(-10px)}
+  50%    {transform:rotate(2deg) translateY(-8px)}
 }
 
 /* ══ SECTION TINTS ══ */
