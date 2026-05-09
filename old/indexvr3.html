@@ -128,7 +128,7 @@ section{min-height:100vh;padding:120px 24px 100px;display:flex;flex-direction:co
 }
 
 /* ══ FLOATING PILL TAGS (NII style) ══ */
-.float-words-layer{position:fixed;inset:0;pointer-events:none;z-index:1;overflow:hidden}
+.float-words-layer{position:fixed;inset:0;pointer-events:none;z-index:6;overflow:hidden}
 .ftag{
   position:absolute;
   font-family:'Noto Serif JP',serif;
@@ -142,6 +142,7 @@ section{min-height:100vh;padding:120px 24px 100px;display:flex;flex-direction:co
   backdrop-filter:blur(4px);
   opacity:0;
   will-change:transform,opacity;
+  /* animation set entirely via JS */
 }
 .boom-star{
   position:absolute;pointer-events:none;font-size:clamp(20px,4vw,36px);
@@ -347,15 +348,13 @@ section{min-height:100vh;padding:120px 24px 100px;display:flex;flex-direction:co
 /* ══════════════════════════════
    FUTURE
 ══════════════════════════════ */
-/* ══ FUTURE ══ */
-.future-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;max-width:840px;width:100%;margin-bottom:56px}
-@media(min-width:600px){.future-grid{grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}}
-.future-card{padding:28px 16px;border-radius:22px;text-align:center;border:2px solid transparent;background:linear-gradient(rgba(6,0,16,.5),rgba(6,0,16,.5)) padding-box,linear-gradient(135deg,var(--c4),var(--c5),var(--c6)) border-box;transition:transform .4s cubic-bezier(.16,1,.3,1),box-shadow .4s}
+.future-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;max-width:840px;width:100%;margin-bottom:56px}
+.future-card{padding:36px 24px;border-radius:22px;text-align:center;border:2px solid transparent;background:linear-gradient(rgba(6,0,16,.5),rgba(6,0,16,.5)) padding-box,linear-gradient(135deg,var(--c4),var(--c5),var(--c6)) border-box;transition:transform .4s cubic-bezier(.16,1,.3,1),box-shadow .4s}
 .future-card:hover{transform:translateY(-12px) rotate(1.5deg);box-shadow:0 20px 65px rgba(78,205,196,.4)}
-.future-icon{font-size:30px;margin-bottom:12px;display:block;animation:flt 3s ease-in-out infinite}
-@keyframes flt{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
-.future-card h3{font-family:'Pacifico',cursive;font-size:14px;color:var(--c4);margin-bottom:8px}
-.future-card p{font-size:12px;line-height:1.9;color:var(--cf)}
+.future-icon{font-size:38px;margin-bottom:16px;display:block;animation:flt 3s ease-in-out infinite}
+@keyframes flt{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+.future-card h3{font-family:'Pacifico',cursive;font-size:17px;color:var(--c4);margin-bottom:10px}
+.future-card p{font-size:13px;line-height:2;color:var(--cf)}
 
 .promise-box{max-width:600px;width:100%;padding:52px 56px;text-align:center;border-radius:26px;border:3px solid transparent;background:linear-gradient(rgba(6,0,16,.65),rgba(6,0,16,.65)) padding-box,linear-gradient(135deg,var(--c1),var(--c2),var(--c3),var(--c4),var(--c5),var(--c6),var(--c1)) border-box;box-shadow:0 0 100px rgba(255,107,157,.16);position:relative}
 .promise-box::before{content:'';position:absolute;top:0;left:14%;right:14%;height:3px;background:linear-gradient(90deg,transparent,var(--c1),var(--c3),var(--c4),transparent)}
@@ -385,20 +384,21 @@ footer::before{content:'';position:absolute;inset:0;background:radial-gradient(e
 }
 
 /* ══ CHARA ══ */
-.chara-wrap{position:relative;width:100%;max-width:600px;padding-top:90px}
+.chara-wrap{position:relative;width:100%;max-width:600px}
 .chara-img{
   position:absolute;
-  top:0;
-  right:clamp(8px,6%,40px);
-  width:clamp(65px,17vw,100px);
+  bottom:100%;
+  right:clamp(12px,5%,40px);
+  width:clamp(70px,18vw,110px);
+  transform:translateY(30%);
   z-index:10;
-  filter:drop-shadow(0 8px 24px rgba(255,107,157,.6)) drop-shadow(0 0 30px rgba(168,85,247,.4));
+  filter:drop-shadow(0 8px 24px rgba(255,107,157,.55)) drop-shadow(0 0 40px rgba(168,85,247,.35));
   animation:charaFloat 3.5s ease-in-out infinite;
   pointer-events:none;
 }
 @keyframes charaFloat{
-  0%,100%{transform:rotate(-2deg) translateY(0)}
-  50%    {transform:rotate(2deg) translateY(-8px)}
+  0%,100%{transform:translateY(30%) rotate(-2deg)}
+  50%    {transform:translateY(22%) rotate(2deg)}
 }
 
 /* ══ SECTION TINTS ══ */
@@ -924,29 +924,30 @@ setInterval(makeConf,260);
     const col  = colors[Math.floor(Math.random()*colors.length)];
     const text = tags[Math.floor(Math.random()*tags.length)];
 
-    // spawn from hero section bottom area (80vh〜110vh = just below the fold)
-    const sx = Math.random()*88;          // vw: random horizontal
-    const sy = 80 + Math.random()*35;     // vh: hero bottom〜just below
+    // random start position anywhere on screen
+    const sx = Math.random()*88;  // vw
+    const sy = Math.random()*82;  // vh
 
-    // drift diagonally — mostly sideways/upward, not straight up
-    const angle = -Math.PI*0.1 + (Math.random()-0.5)*Math.PI*1.4; // -18°〜-198° = sideways/up
-    const dist  = 120 + Math.random()*200;
+    // random drift direction
+    const angle = Math.random()*Math.PI*2;
+    const dist  = 90 + Math.random()*150;
     const tx = Math.cos(angle)*dist;
     const ty = Math.sin(angle)*dist;
-    const r0 = (Math.random()-0.5)*14;
-    const r1 = r0 + (Math.random()-0.5)*18;
+    const r0 = (Math.random()-0.5)*16;
+    const r1 = r0 + (Math.random()-0.5)*20;
 
-    const dur = (9 + Math.random()*10) * 1000;
-    const del = (Math.random()*4) * 1000;
+    const dur = (7 + Math.random()*9) * 1000;  // ms
+    const del = (Math.random()*5) * 1000;
 
     el.textContent = text;
     el.style.cssText = `left:${sx}vw;top:${sy}vh;--tc:${col};`;
+
     layer.appendChild(el);
 
     el.animate([
       {opacity:0,   transform:`translate(0,0) rotate(${r0}deg)`},
-      {opacity:0.88,transform:`translate(0,0) rotate(${r0}deg)`, offset:0.06},
-      {opacity:0.78,transform:`translate(${tx*.7}px,${ty*.7}px) rotate(${(r0+r1)/2}deg)`, offset:0.84},
+      {opacity:0.85,transform:`translate(0,0) rotate(${r0}deg)`, offset:0.07},
+      {opacity:0.75,transform:`translate(${tx*.7}px,${ty*.7}px) rotate(${(r0+r1)/2}deg)`, offset:0.85},
       {opacity:0,   transform:`translate(${tx}px,${ty}px) rotate(${r1}deg)`},
     ], {
       duration: dur,
@@ -956,8 +957,10 @@ setInterval(makeConf,260);
     }).finished.then(()=>el.remove());
   }
 
-  for(let i=0;i<20;i++) setTimeout(makeTag, i*200);
-  setInterval(makeTag, 900);
+  // seed with many tags upfront
+  for(let i=0;i<22;i++) setTimeout(makeTag, i*180);
+  // keep spawning
+  setInterval(makeTag, 850);
 })();
 
 /* ══ CRACKER (クラッカー) BURST ══ */
