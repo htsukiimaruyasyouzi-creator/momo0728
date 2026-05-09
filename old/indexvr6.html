@@ -394,29 +394,6 @@ footer::before{content:'';position:absolute;inset:0;background:radial-gradient(e
   .mem-dot-col{min-width:42px}
 }
 
-/* ══ TITLE WITH IMAGE ══ */
-.title-with-img{
-  display:flex;align-items:center;justify-content:center;
-  gap:12px;flex-wrap:wrap;margin-bottom:8px;
-}
-.title-with-img .stitle{margin-bottom:0;}
-
-.title-img{
-  flex-shrink:0;
-  filter:drop-shadow(0 8px 24px rgba(255,107,157,.55)) drop-shadow(0 0 30px rgba(168,85,247,.4));
-  animation:titleImgFloat 3s ease-in-out infinite;
-}
-@keyframes titleImgFloat{
-  0%,100%{transform:translateY(0) rotate(-2deg)}
-  50%    {transform:translateY(-10px) rotate(2deg)}
-}
-.title-img--hiro2{
-  width:clamp(80px,22vw,130px);
-}
-.title-img--hiro3{
-  width:clamp(90px,24vw,140px);
-}
-
 /* ══ CHARA ══ */
 .chara-wrap{position:relative;width:100%;max-width:600px;padding-top:0;overflow:visible}
 .chara-img{
@@ -433,42 +410,6 @@ footer::before{content:'';position:absolute;inset:0;background:radial-gradient(e
 @keyframes charaFloat{
   0%,100%{transform:rotate(-2deg) translateY(0)}
   50%    {transform:rotate(2deg) translateY(-10px)}
-}
-
-/* ══ HIRO2 (Memories) ══ */
-.hiro2-wrap{
-  display:flex;flex-direction:column;align-items:center;
-  margin-top:44px;gap:16px;
-}
-.hiro2-img{
-  width:clamp(200px,60vw,300px);
-  filter:drop-shadow(0 12px 36px rgba(255,107,157,.5)) drop-shadow(0 0 40px rgba(168,85,247,.35));
-  animation:hiro2bounce 2.8s ease-in-out infinite;
-}
-@keyframes hiro2bounce{
-  0%,100%{transform:translateY(0) rotate(-1deg)}
-  50%    {transform:translateY(-12px) rotate(1deg)}
-}
-.hiro2-caption{
-  font-family:'Pacifico',cursive;
-  font-size:16px;color:var(--c1);
-  text-shadow:0 0 20px rgba(255,107,157,.6);
-  letter-spacing:0.05em;
-}
-
-/* ══ HIRO3 (Future) ══ */
-.hiro3-wrap{
-  display:flex;justify-content:center;
-  margin:8px 0 36px;
-}
-.hiro3-img{
-  width:clamp(220px,70vw,380px);
-  filter:drop-shadow(0 16px 48px rgba(78,205,196,.4)) drop-shadow(0 0 40px rgba(255,107,157,.3));
-  animation:hiro3float 4s ease-in-out infinite;
-}
-@keyframes hiro3float{
-  0%,100%{transform:translateY(0) rotate(-1.5deg)}
-  50%    {transform:translateY(-16px) rotate(1.5deg)}
 }
 
 /* ══ SECTION TINTS ══ */
@@ -633,10 +574,7 @@ footer::before{content:'';position:absolute;inset:0;background:radial-gradient(e
 <!-- ████ TIMELINE ████ -->
 <section class="sec-a">
   <p class="stag rv-zoom">✦ Memories ✦</p>
-  <div class="title-with-img rv-flip">
-    <h2 class="stitle">二人の思い出</h2>
-    <img src="hiro2.png" alt="ふたり" class="title-img title-img--hiro2">
-  </div>
+  <h2 class="stitle rv-flip">二人の思い出</h2>
   <div class="timeline">
     <div class="mem rv-l" style="transition-delay:.04s">
       <div class="mem-dot-col"><div class="mem-dot"></div></div>
@@ -659,22 +597,20 @@ footer::before{content:'';position:absolute;inset:0;background:radial-gradient(e
       <div class="mem-body"><p class="mem-date">何でもない、いつかの日</p><div class="mem-emoji">☕</div><h3>特別じゃない、特別な日</h3><p>何もしていないのに、隣にあなたがいるだけで幸せだった日。普通の日常が、一番の宝物だと気づいた。これからもこんな日々を、一緒に積み重ねていきたい。</p></div>
     </div>
   </div>
-
-
 </section>
+
+<div class="rdiv"></div>
+
+<!-- ████ FUTURE ████ -->
 <section class="sec-b">
   <p class="stag rv-zoom">✦ Future ✦</p>
-  <div class="title-with-img rv-flip">
-    <h2 class="stitle">これからの未来へ</h2>
-    <img src="hiro3.png" alt="二人のイラスト" class="title-img title-img--hiro3">
-  </div>
+  <h2 class="stitle rv-flip">これからの未来へ</h2>
   <div class="future-grid">
     <div class="future-card rv-s" style="transition-delay:.05s"><span class="future-icon">🌏</span><h3>行きたい場所へ、一緒に</h3><p>まだ見ぬ景色を、二人で見に行こう。どこへでも、あなたと一緒なら行けると思う。</p></div>
     <div class="future-card rv-s" style="transition-delay:.15s"><span class="future-icon">🌱</span><h3>お互いに成長しながら</h3><p>それぞれの夢に向かって、お互いを応援しながら、一緒に前へ進んでいきたい。</p></div>
     <div class="future-card rv-s" style="transition-delay:.25s"><span class="future-icon">🏠</span><h3>ふたりの日常をつくる</h3><p>特別じゃなくていい。ただ、毎日あなたと笑える場所をつくっていきたい。</p></div>
     <div class="future-card rv-s" style="transition-delay:.35s"><span class="future-icon">🎂</span><h3>来年も、その先も</h3><p>27歳も、28歳も、ずっと一緒にお祝いしよう。毎年、あなたの笑顔を見るのが楽しみ。</p></div>
   </div>
-
   <div class="chara-wrap rv-g">
     <img class="chara-img" src="hiro1.png" alt="キャラクター">
     <div class="promise-box">
